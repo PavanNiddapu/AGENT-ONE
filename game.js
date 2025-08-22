@@ -29,7 +29,7 @@ scene("main", () => {
         rect(32, 32),
         pos(width() / 4, 0),
         color(255, 255, 255), // White
-        origin("center"),
+        anchor("center"),
         body(),
         "player",
     ]);
@@ -82,7 +82,7 @@ scene("main", () => {
             rect(32, 32),
             pos(platform.x + platform.width / 2, platform.y - 20),
             color(255, 0, 0), // Red
-            origin("center"),
+            anchor("center"),
             body(),
             solid(),
             area(),
@@ -116,7 +116,7 @@ scene("main", () => {
             rect(8, 8),
             pos(player.pos.x, player.pos.y),
             color(255, 255, 255), // White
-            origin("center"),
+            anchor("center"),
             move(bullet_direction, BULLET_SPEED),
             cleanup(),
             area(),
