@@ -16,6 +16,13 @@ const ENEMY_SPEED = 100;
 
 scene("main", () => {
     let lastDirection = "right";
+    let score = 0;
+
+    // Score UI
+    const scoreLabel = add([
+        text("Score: " + score),
+        pos(24, 24),
+    ]);
 
     // Player
     const player = add([
@@ -125,6 +132,8 @@ scene("main", () => {
     onCollide("bullet", "enemy", (bullet, enemy) => {
         destroy(bullet);
         destroy(enemy);
+        score += 10;
+        scoreLabel.text = "Score: " + score;
     });
 
     player.onCollide("enemy", () => {
