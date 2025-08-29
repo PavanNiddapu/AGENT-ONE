@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { InputProps } from '../../types';
 
-const InputContainer = styled.div`
+const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
@@ -20,12 +19,13 @@ const Label = styled.label`
   }
 `;
 
-const StyledInput = styled.input<{ $hasError: boolean }>`
+const StyledSelect = styled.select<{ $hasError: boolean }>`
   padding: 12px 16px;
   border: 2px solid ${props => props.$hasError ? '#dc3545' : '#e0e6ed'};
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.2s ease-in-out;
+  background-color: white;
   
   &:focus {
     outline: none;
@@ -37,10 +37,6 @@ const StyledInput = styled.input<{ $hasError: boolean }>`
     color: #6c757d;
     cursor: not-allowed;
   }
-  
-  &::placeholder {
-    color: #6c757d;
-  }
 `;
 
 const ErrorMessage = styled.span`
@@ -49,44 +45,48 @@ const ErrorMessage = styled.span`
   margin-top: 4px;
 `;
 
-const Input: React.FC<InputProps> = ({
-  type = 'text',
+interface SelectProps {
+  name: string;
+  value: string | number;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  label?: string;
+  required?: boolean;
+  disabled?: boolean;
+  error?: string;
+  children: React.ReactNode;
+}
+
+const Select: React.FC<SelectProps> = ({
   name,
-  placeholder,
   value,
   onChange,
-  error,
   label,
   required = false,
   disabled = false,
-  min,
-  max,
-  step,
+  error,
+  children,
   ...props
 }) => {
   return (
-    <InputContainer>
+    <SelectContainer>
       {label && (
         <Label className={required ? 'required' : ''}>
           {label}
         </Label>
       )}
-      <StyledInput
-        type={type}
+      <StyledSelect
         name={name}
-        placeholder={placeholder}
         value={value}
         onChange={onChange}
         $hasError={!!error}
         disabled={disabled}
-        min={min}
-        max={max}
-        step={step}
         {...props}
-      />
+      >
+        {children}
+      </StyledSelect>
       {error && <ErrorMessage>{error}</ErrorMessage>}
-    </InputContainer>
+    </SelectContainer>
   );
 };
 
-export default Input;
+export default Select;

@@ -7,6 +7,8 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import RestaurantsPage from './pages/RestaurantsPage';
+import LogNewVisitPage from './pages/LogNewVisitPage';
+import ViewVisitsPage from './pages/ViewVisitsPage';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -106,10 +108,15 @@ const AppRoutes: React.FC = () => {
         path="/visits" 
         element={
           <ProtectedRoute>
-            <div style={{ padding: '20px', textAlign: 'center' }}>
-              <h1>My Visits</h1>
-              <p>This page is under construction.</p>
-            </div>
+            <ViewVisitsPage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/visits/new" 
+        element={
+          <ProtectedRoute>
+            <LogNewVisitPage />
           </ProtectedRoute>
         } 
       />
