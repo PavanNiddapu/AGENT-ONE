@@ -190,6 +190,9 @@ export interface InputProps {
   label?: string;
   required?: boolean;
   disabled?: boolean;
+  min?: string;
+  max?: string;
+  step?: string;
 }
 
 export interface SelectProps {
